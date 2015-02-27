@@ -14,10 +14,16 @@ fi
 HOST=`cat $CONFIG | grep HOST | sed 's/HOST=//'`
 PORT=`cat $CONFIG | grep PORT | sed 's/PORT=//'`
 
+echo "Connecting to remote host "$HOST":"$PORT"."
+echo
+
 nc $HOST $PORT
 
 if [ $? -eq 1 ]
 then
+    echo "Fail to connect."
+    echo "Listening for incoming connection to port "$PORT"."
+    echo
     nc -l $PORT
 fi
 
